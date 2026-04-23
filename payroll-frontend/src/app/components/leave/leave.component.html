@@ -1,0 +1,90 @@
+<div class="container-fluid">
+
+  <!-- Header -->
+ <div class="header">
+  <h4>Leave Management</h4>
+
+  <button class="btn btn-primary" (click)="openModal()">
+    + Apply Leave
+  </button>
+</div>
+
+  <!-- Table -->
+  <div class="table-card">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>Employee ID</th>
+          <th>From</th>
+          <th>To</th>
+          <th>Status</th>
+          <th *ngIf="role === 'admin'">Action</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let leave of leaveList">
+          <td>{{leave.employeeId}}</td>
+          <td>{{leave.fromDate}}</td>
+          <td>{{leave.toDate}}</td>
+
+          <td>
+            <span [ngClass]="{
+              'badge bg-warning': leave.status === 'Pending',
+              'badge bg-success': leave.status === 'Approved',
+              'badge bg-danger': leave.status === 'Rejected'
+            }">
+              {{leave.status}}
+            </span>
+          </td>
+
+          <!-- Admin Actions -->
+          <td *ngIf="role === 'admin'">
+            <button class="btn btn-success btn-sm me-2" 
+                    (click)="updateStatus(leave.id, 'Approved')">
+              Approve
+            </button>
+
+            <button class="btn btn-danger btn-sm" 
+                    (click)="updateStatus(leave.id, 'Rejected')">
+              Reject
+            </button>
+          </td>
+
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="leaveModal">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h5>Apply Leave</h5>
+        <button class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <div class="modal-body">
+
+        <input [(ngModel)]="leave.employeeId" class="form-control mb-3" placeholder="Employee ID">
+
+        <label>From Date</label>
+        <input type="date" [(ngModel)]="leave.fromDate" class="form-control mb-3">
+
+        <label>To Date</label>
+        <input type="date" [(ngModel)]="leave.toDate" class="form-control mb-3">
+
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <button class="btn btn-primary" (click)="apply()">Submit</button>
+      </div>
+
+    </div>
+  </div>
+</div>
