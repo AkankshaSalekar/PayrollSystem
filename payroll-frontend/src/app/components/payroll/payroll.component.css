@@ -1,25 +1,8 @@
-.header {
-  margin-bottom: 20px;
-}
-
-/* Card */
-.card-box {
-  background: white;
-  padding: 15px;
+.card {
   border-radius: 10px;
   box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-  margin-bottom: 20px;
 }
 
-/* Result */
-.result-card {
-  background: white;
-  padding: 20px;
-  border-radius: 12px;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.05);
-}
-
-/* Stats */
 .stat-box {
   padding: 15px;
   border-radius: 10px;
@@ -39,10 +22,56 @@
   color: white;
 }
 
-/* Table */
-.table-card {
-  background: white;
-  padding: 15px;
-  border-radius: 10px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.table {
+  min-width: 650px;
+}
+
+.table th {
+  font-weight: 600;
+}
+
+.table td {
+  vertical-align: middle;
+}
+
+@media (max-width: 768px) {
+
+  .btn {
+    font-size: 13px;
+    padding: 8px;
+  }
+
+  .table th,
+  .table td {
+    font-size: 12px;
+    white-space: nowrap;
+  }
+
+  .stat-box {
+    text-align: center;
+  }
+
+  .modal-content {
+    padding: 10px;
+  }
+
+}
+
+@media (max-width: 480px) {
+
+  .btn {
+    font-size: 12px;
+  }
+
+  .table th,
+  .table td {
+    font-size: 11px;
+  }
+
 }

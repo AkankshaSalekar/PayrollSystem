@@ -1,79 +1,83 @@
 <div class="container-fluid">
 
-  <div class="d-flex justify-content-between align-items-center mb-3">
-    <h4 class="fw-bold">Leave Management</h4>
+  <div class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center gap-2 mb-3">
+    <h4 class="fw-bold mb-0">Leave Management</h4>
 
-    <button class="btn btn-primary" (click)="openModal()">
-      + Apply Leave
-    </button>
+ <button class="btn btn-primary w-100" (click)="openModal()">
+  + Apply Leave
+</button>
   </div>
 
   <div class="card shadow-sm p-3">
 
-    <table class="table table-hover">
-      <thead class="table-light">
-        <tr>
-          <th>Employee</th>
-          <th>From</th>
-          <th>To</th>
-          <th>Status</th>
-          <th *ngIf="role === 'admin'">Action</th>
-        </tr>
-      </thead>
+    <div class="table-responsive">
+      <table class="table table-hover">
 
-      <tbody>
+        <thead class="table-light">
+          <tr>
+            <th>Employee</th>
+            <th>From</th>
+            <th>To</th>
+            <th>Status</th>
+            <th *ngIf="role === 'admin'">Action</th>
+          </tr>
+        </thead>
 
-        <tr *ngIf="leaveList.length === 0">
-          <td colspan="5" class="text-center text-muted">
-            No leave records found
-          </td>
-        </tr>
+        <tbody>
 
-        <tr *ngFor="let leave of leaveList">
-          <td>
-            {{ leave.employeeId }} -
-            {{ getEmployeeName(leave.employeeId) }}
-          </td>
+          <tr *ngIf="leaveList.length === 0">
+            <td colspan="5" class="text-center text-muted">
+              No leave records found
+            </td>
+          </tr>
 
-          <td>{{ leave.fromDate }}</td>
-          <td>{{ leave.toDate }}</td>
+          <tr *ngFor="let leave of leaveList">
+            <td>
+              {{ leave.employeeId }} -
+              {{ getEmployeeName(leave.employeeId) }}
+            </td>
 
-          <td>
-            <span [ngClass]="{
-              'badge bg-warning text-dark': leave.status === 'Pending',
-              'badge bg-success': leave.status === 'Approved',
-              'badge bg-danger': leave.status === 'Rejected'
-            }">
-              {{ leave.status }}
-            </span>
-          </td>
+            <td>{{ leave.fromDate }}</td>
+            <td>{{ leave.toDate }}</td>
 
-          <td *ngIf="role === 'admin'">
+            <td>
+              <span [ngClass]="{
+                'badge bg-warning text-dark': leave.status === 'Pending',
+                'badge bg-success': leave.status === 'Approved',
+                'badge bg-danger': leave.status === 'Rejected'
+              }">
+                {{ leave.status }}
+              </span>
+            </td>
 
-            <button class="btn btn-success btn-sm me-2"
-                    (click)="updateStatus(leave.id, 'Approved')"
-                    [disabled]="leave.status === 'Approved'">
-              Approve
-            </button>
+            <td *ngIf="role === 'admin'" class="action-cell">
 
-            <button class="btn btn-danger btn-sm"
-                    (click)="updateStatus(leave.id, 'Rejected')"
-                    [disabled]="leave.status === 'Rejected'">
-              Reject
-            </button>
+            <button class="btn btn-success btn-sm w-100 mb-1"
+        (click)="updateStatus(leave.id, 'Approved')"
+        [disabled]="leave.status === 'Approved'">
+  Approve
+</button>
 
-          </td>
+              
+<button class="btn btn-danger btn-sm w-100"
+        (click)="updateStatus(leave.id, 'Rejected')"
+        [disabled]="leave.status === 'Rejected'">
+  Reject
+</button>
 
-        </tr>
-      </tbody>
-    </table>
+            </td>
+
+          </tr>
+        </tbody>
+      </table>
+    </div>
 
   </div>
 
 </div>
 
 <div class="modal fade" id="leaveModal" tabindex="-1">
-  <div class="modal-dialog modal-dialog-centered">
+  <div class="modal-dialog modal-dialog-centered modal-sm modal-md">
     <div class="modal-content">
 
       <div class="modal-header">
@@ -84,33 +88,27 @@
       <div class="modal-body">
 
         <label class="form-label">Employee</label>
-        <select [(ngModel)]="leave.employeeId"
-                class="form-control mb-3">
+        <select [(ngModel)]="leave.employeeId" class="form-control mb-3">
           <option value="">Select Employee</option>
-
           <option *ngFor="let emp of employees" [value]="emp.id">
             {{ emp.name }} (ID: {{ emp.id }})
           </option>
         </select>
 
         <label class="form-label">From Date</label>
-        <input type="date"
-               [(ngModel)]="leave.fromDate"
-               class="form-control mb-3">
+        <input type="date" [(ngModel)]="leave.fromDate" class="form-control mb-3">
 
         <label class="form-label">To Date</label>
-        <input type="date"
-               [(ngModel)]="leave.toDate"
-               class="form-control mb-3">
+        <input type="date" [(ngModel)]="leave.toDate" class="form-control mb-3">
 
       </div>
 
       <div class="modal-footer">
-        <button class="btn btn-secondary" data-bs-dismiss="modal">
+        <button class="btn btn-secondary w-50" data-bs-dismiss="modal">
           Cancel
         </button>
 
-        <button class="btn btn-primary" (click)="apply()">
+        <button class="btn btn-primary w-50" (click)="apply()">
           Submit
         </button>
       </div>

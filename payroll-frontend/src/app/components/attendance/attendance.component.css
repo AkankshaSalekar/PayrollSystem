@@ -88,3 +88,11 @@ h4 {
 .table {
   min-width: 500px;
 }
+@media (min-width: 768px) {
+  .btn.w-100 {
+    width: auto !important;
+  }
+}
+.btn {
+  padding: 6px 16px;
+}

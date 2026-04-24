@@ -1,70 +1,65 @@
 <div class="container-fluid">
 
-
-  <div class="header">
-    <h4>Employees</h4>
-  <button class="btn btn-primary" (click)="openModal()">
+  <div class="header flex-column flex-md-row">
+    <h4 class="mb-2 mb-md-0">Employees</h4>
+ <button class="btn btn-primary w-100" (click)="openModal()">
   + Create Employee
 </button>
+
   </div>
 
   <div class="table-card">
-    <table class="table">
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Role</th>
-          <th>Salary Type</th>
-          <th>Amount</th>
-          <th class="text-center">Action</th>
-        </tr>
-      </thead>
+    <div class="table-responsive">
+      <table class="table table-hover">
 
-      <tbody>
-        <tr *ngFor="let emp of employees">
-          <td>{{ emp.name }}</td>
-          <td>{{ emp.role }}</td>
-          <td>{{ emp.salaryType }}</td>
-          <td>₹{{ emp.salaryAmount }}</td>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Role</th>
+            <th>Salary Type</th>
+            <th>Amount</th>
+            <th class="text-center">Action</th>
+          </tr>
+        </thead>
 
-  
-          <td class="text-center">
-            <div class="dropdown">
-              <button class="action-btn" data-bs-toggle="dropdown">
-                ⋮
-              </button>
+        <tbody>
+          <tr *ngFor="let emp of employees">
+            <td>{{ emp.name }}</td>
+            <td>{{ emp.role }}</td>
+            <td>{{ emp.salaryType }}</td>
+            <td>₹{{ emp.salaryAmount }}</td>
 
-              <ul class="dropdown-menu dropdown-menu-end">
-                <li>
-                  <button class="dropdown-item" (click)="view(emp)">
-                    View
-                  </button>
-                </li>
+            <td class="text-center">
+              <div class="dropdown">
+                <button class="action-btn" data-bs-toggle="dropdown">⋮</button>
 
-                <li>
-                  <button class="dropdown-item" (click)="edit(emp)">
-                    Update
-                  </button>
-                </li>
+                <ul class="dropdown-menu dropdown-menu-end">
+                  <li>
+                    <button class="dropdown-item" (click)="view(emp)">View</button>
+                  </li>
+                  <li>
+                    <button class="dropdown-item" (click)="edit(emp)">Update</button>
+                  </li>
+                  <li>
+                    <button class="dropdown-item text-danger" (click)="delete(emp.id)">
+                      Delete
+                    </button>
+                  </li>
+                </ul>
+              </div>
+            </td>
 
-                <li>
-                  <button class="dropdown-item text-danger" (click)="delete(emp.id)">
-                    Delete
-                  </button>
-                </li>
-              </ul>
-            </div>
-          </td>
+          </tr>
+        </tbody>
 
-        </tr>
-      </tbody>
-    </table>
+      </table>
+    </div>
   </div>
 
 </div>
 
 <div class="modal fade" id="employeeModal" tabindex="-1">
-  <div class="modal-dialog modal-dialog-centered">
+  <div class="modal-dialog modal-dialog-centered modal-sm modal-md">
     <div class="modal-content">
 
       <div class="modal-header">
@@ -94,9 +89,8 @@
       </div>
 
       <div class="modal-footer">
-        <button class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-
-        <button class="btn btn-success" (click)="save()">
+        <button class="btn btn-secondary w-50" data-bs-dismiss="modal">Cancel</button>
+        <button class="btn btn-success w-50" (click)="save()">
           {{ isEdit ? 'Update' : 'Save' }}
         </button>
       </div>

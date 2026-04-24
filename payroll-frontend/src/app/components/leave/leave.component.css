@@ -1,18 +1,72 @@
-.header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
-}
-
-.table-card {
-  background: white;
+.card {
   border-radius: 10px;
-  padding: 10px;
   box-shadow: 0 2px 10px rgba(0,0,0,0.05);
 }
 
 .badge {
   padding: 6px 10px;
   border-radius: 6px;
+  font-size: 13px;
+}
+
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.table {
+  min-width: 650px;
+}
+
+.table th {
+  font-weight: 600;
+}
+
+.table td {
+  vertical-align: middle;
+}
+
+.action-cell {
+  min-width: 120px;
+}
+
+@media (max-width: 768px) {
+
+  .btn {
+    font-size: 13px;
+    padding: 8px;
+  }
+
+  .table th,
+  .table td {
+    font-size: 12px;
+    white-space: nowrap;
+  }
+
+  .modal-content {
+    padding: 10px;
+  }
+
+}
+
+@media (max-width: 480px) {
+
+  .btn {
+    font-size: 12px;
+  }
+
+  .table th,
+  .table td {
+    font-size: 11px;
+  }
+
+}
+@media (min-width: 768px) {
+  .btn.w-100 {
+    width: auto !important;
+  }
+}
+.btn {
+  padding: 6px 16px;
 }

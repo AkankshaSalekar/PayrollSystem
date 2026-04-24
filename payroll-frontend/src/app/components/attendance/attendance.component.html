@@ -1,128 +1,13 @@
-<!-- <div class="container-fluid">
-
- 
-  <div class="d-flex justify-content-between align-items-center mb-3">
-    <h4>Attendance</h4>
-    <button class="btn btn-primary" (click)="openModal()">+ Mark Attendance</button>
-  </div>
-  <button class="btn btn-outline-primary" (click)="getTodayAttendance()">
-  Show Today
-</button>
-
-  <div class="card p-3 mb-3">
-    <div class="row">
-      <div class="col-md-4">
-        <input [(ngModel)]="searchEmployeeId" class="form-control" placeholder="Enter Employee ID">
-      </div>
-      <div class="col-md-2">
-        <button class="btn btn-secondary w-100" (click)="getAttendance()">Search</button>
-      </div>
-    </div>
-  </div>
-
- <div class="card p-3 mb-3" *ngIf="showToday && todayList && todayList.length > 0">
-    <h5>Today's Attendance</h5>
-
-    <table class="table">
-      <thead>
-        <tr>
-          <th>Employee</th>
-          <th>Date</th>
-          <th>Status</th>
-        </tr>
-      </thead>
-
-      <tbody>
-        <tr *ngFor="let att of todayList">
-          <td>{{ att.employeeId }} - {{ getEmployeeName(att.employeeId) }}</td>
-          <td>{{ att.date }}</td>
-          <td>
-            <span class="badge bg-success" *ngIf="att.status === 'Present'">Present</span>
-            <span class="badge bg-danger" *ngIf="att.status === 'Absent'">Absent</span>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-
-
-<div class="card p-3" *ngIf="showSearch && attendanceList && attendanceList.length > 0">
-    <h5>Search Result</h5>
-
-    <table class="table">
-      <thead>
-        <tr>
-          <th>Employee</th>
-          <th>Date</th>
-          <th>Status</th>
-        </tr>
-      </thead>
-
-      <tbody>
-        <tr *ngFor="let att of attendanceList">
-          <td>{{ att.employeeId }} - {{ getEmployeeName(att.employeeId) }}</td>
-          <td>{{ att.date }}</td>
-          <td>
-            <span [ngClass]="{
-              'badge bg-success': att.status === 'Present',
-              'badge bg-danger': att.status === 'Absent'
-            }">
-              {{ att.status }}
-            </span>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-
-</div>
-
-<div class="modal fade" id="attendanceModal">
-  <div class="modal-dialog">
-    <div class="modal-content">
-
-      <div class="modal-header">
-        <h5>Mark Attendance</h5>
-        <button class="btn-close" data-bs-dismiss="modal"></button>
-      </div>
-
-      <div class="modal-body">
-
-        <select [(ngModel)]="attendance.employeeId" class="form-control mb-3">
-          <option value="">Select Employee</option>
-          <option *ngFor="let emp of employees" [value]="emp.id">
-            {{ emp.name }} (ID: {{ emp.id }})
-          </option>
-        </select>
-
-        <input type="date" [(ngModel)]="attendance.date" class="form-control mb-3">
-
-        <select [(ngModel)]="attendance.status" class="form-control mb-3">
-          <option value="">Select Status</option>
-          <option>Present</option>
-          <option>Absent</option>
-        </select>
-
-      </div>
-
-      <div class="modal-footer">
-        <button class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-        <button class="btn btn-success" (click)="save()">Submit</button>
-      </div>
-
-    </div>
-  </div>
-</div> -->
 
 <div class="container-fluid">
 
-  <!-- HEADER -->
   <div class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center gap-2 mb-3">
     <h4 class="mb-0">Attendance</h4>
-    <button class="btn btn-primary w-100 w-md-auto" (click)="openModal()">+ Mark Attendance</button>
-  </div>
+<button class="btn btn-primary w-100" (click)="openModal()">
+  + Mark Attendance
+</button>  </div>
 
-  <!-- SEARCH + TODAY -->
+
   <div class="card p-3 mb-3">
     <div class="row g-2">
 
@@ -145,7 +30,7 @@
     </div>
   </div>
 
-  <!-- TODAY ATTENDANCE -->
+
   <div class="card p-3 mb-3"
        *ngIf="showToday && todayList && todayList.length > 0">
 
@@ -184,7 +69,7 @@
     </div>
   </div>
 
-  <!-- SEARCH RESULT -->
+
   <div class="card p-3"
        *ngIf="showSearch && attendanceList && attendanceList.length > 0">
 
@@ -225,7 +110,7 @@
 
 </div>
 
-<!-- MODAL -->
+
 <div class="modal fade" id="attendanceModal">
   <div class="modal-dialog modal-dialog-centered modal-sm modal-md">
     <div class="modal-content">
