@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
-const API = 'http://localhost:8000/leave';
+const API = 'https://payrollsystem-6wam.onrender.com/leave';
 
 @Injectable({ providedIn: 'root' })
 export class LeaveService {

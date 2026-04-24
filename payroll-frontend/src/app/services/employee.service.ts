@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
-const API = 'http://localhost:8000/employees';
+const API = 'https://payrollsystem-6wam.onrender.com/employees';
 
 @Injectable({
   providedIn: 'root'
