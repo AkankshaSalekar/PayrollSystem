@@ -1,5 +1,6 @@
-import { Component, AfterViewInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { LeaveService } from 'src/app/services/leave.service';
+import { EmployeeService } from 'src/app/services/employee.service';
 
 declare var bootstrap: any;
 
@@ -8,55 +9,118 @@ declare var bootstrap: any;
   templateUrl: './leave.component.html',
   styleUrls: ['./leave.component.css']
 })
-export class LeaveComponent implements AfterViewInit {
+export class LeaveComponent implements OnInit, AfterViewInit {
 
+  // ================= DATA =================
   leaveList: any[] = [];
+  employees: any[] = [];
+
   modal: any;
 
-  // change role here for testing
-  role: string = 'admin'; // 'employee' or 'admin'
+  // role (for demo)
+  role: string = 'admin';   // change to 'employee' if needed
 
+  // form model
   leave: any = {
     employeeId: '',
     fromDate: '',
     toDate: ''
   };
 
-  constructor(private service: LeaveService) {}
+  constructor(
+    private leaveService: LeaveService,
+    private employeeService: EmployeeService
+  ) {}
 
-  ngAfterViewInit() {
-    this.modal = new bootstrap.Modal(document.getElementById('leaveModal'));
-  }
-
-  ngOnInit() {
+  // ================= INIT =================
+  ngOnInit(): void {
     this.loadLeaves();
+    this.loadEmployees();
   }
 
-  loadLeaves() {
-    this.service.getAllLeaves().subscribe((res: any) => {
-      this.leaveList = res;
+  ngAfterViewInit(): void {
+    const modalElement = document.getElementById('leaveModal');
+    this.modal = new bootstrap.Modal(modalElement);
+  }
+
+  // ================= LOAD DATA =================
+
+  loadLeaves(): void {
+    this.leaveService.getAllLeaves().subscribe({
+      next: (res: any) => {
+        this.leaveList = res.data;   // ✅ correct response handling
+      },
+      error: (err) => {
+        console.error(err);
+        alert("Failed to load leaves");
+      }
     });
   }
 
-  openModal() {
+  loadEmployees(): void {
+    this.employeeService.getAll().subscribe({
+      next: (res: any) => {
+        this.employees = res.data;
+      },
+      error: (err) => {
+        console.error(err);
+        alert("Failed to load employees");
+      }
+    });
+  }
+
+  // ================= MODAL =================
+
+  openModal(): void {
     this.leave = {
       employeeId: '',
       fromDate: '',
       toDate: ''
     };
+
     this.modal.show();
   }
 
-  apply() {
-    this.service.applyLeave(this.leave).subscribe(() => {
-      this.modal.hide();
-      this.loadLeaves();
+  // ================= APPLY LEAVE =================
+
+  apply(): void {
+    if (!this.leave.employeeId || !this.leave.fromDate || !this.leave.toDate) {
+      alert("All fields are required");
+      return;
+    }
+
+    this.leaveService.applyLeave(this.leave).subscribe({
+      next: (res: any) => {
+        alert(res.message);
+        this.modal.hide();
+        this.loadLeaves();
+      },
+      error: (err) => {
+        console.error(err);
+        alert("Failed to apply leave");
+      }
     });
   }
 
-  updateStatus(id: number, status: string) {
-    this.service.updateLeave(id, status).subscribe(() => {
-      this.loadLeaves();
+  // ================= UPDATE STATUS =================
+
+  updateStatus(id: number, status: string): void {
+    this.leaveService.updateLeave(id, status).subscribe({
+      next: (res: any) => {
+        alert(res.message);
+        this.loadLeaves();
+      },
+      error: (err) => {
+        console.error(err);
+        alert("Failed to update leave");
+      }
     });
+  }
+
+  // ================= HELPER =================
+
+  getEmployeeName(id: number): string {
+    const emp = this.employees.find(e => e.id === id);
+    return emp ? emp.name : 'Unknown';
   }
 }

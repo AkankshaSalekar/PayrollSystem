@@ -16,7 +16,7 @@ export class LeaveService {
     return this.http.put(`${API}/${id}`, { status });
   }
 
-  getAllLeaves() {
-    return this.http.get(API);
-  }
+getAllLeaves() {
+  return this.http.get<any>(API);
+}
 }

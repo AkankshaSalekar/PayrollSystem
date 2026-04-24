@@ -8,7 +8,7 @@ export class PayrollService {
 
   constructor(private http: HttpClient) {}
 
-  getPayroll(empId: number) {
-    return this.http.get(`${API}/${empId}`);
-  }
+ getPayroll(empId: number) {
+  return this.http.get<any>(`${API}/${empId}`);
+}
 }

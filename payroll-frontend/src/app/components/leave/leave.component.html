@@ -1,20 +1,21 @@
 <div class="container-fluid">
 
-  <!-- Header -->
- <div class="header">
-  <h4>Leave Management</h4>
+  <!-- ================= HEADER ================= -->
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h4 class="fw-bold">Leave Management</h4>
 
-  <button class="btn btn-primary" (click)="openModal()">
-    + Apply Leave
-  </button>
-</div>
+    <button class="btn btn-primary" (click)="openModal()">
+      + Apply Leave
+    </button>
+  </div>
 
-  <!-- Table -->
-  <div class="table-card">
+  <!-- ================= TABLE ================= -->
+  <div class="card shadow-sm p-3">
+
     <table class="table table-hover">
-      <thead>
+      <thead class="table-light">
         <tr>
-          <th>Employee ID</th>
+          <th>Employee</th>
           <th>From</th>
           <th>To</th>
           <th>Status</th>
@@ -23,66 +24,108 @@
       </thead>
 
       <tbody>
-        <tr *ngFor="let leave of leaveList">
-          <td>{{leave.employeeId}}</td>
-          <td>{{leave.fromDate}}</td>
-          <td>{{leave.toDate}}</td>
 
+        <!-- No Data -->
+        <tr *ngIf="leaveList.length === 0">
+          <td colspan="5" class="text-center text-muted">
+            No leave records found
+          </td>
+        </tr>
+
+        <!-- Data -->
+        <tr *ngFor="let leave of leaveList">
+          <td>
+            {{ leave.employeeId }} -
+            {{ getEmployeeName(leave.employeeId) }}
+          </td>
+
+          <td>{{ leave.fromDate }}</td>
+          <td>{{ leave.toDate }}</td>
+
+          <!-- Status -->
           <td>
             <span [ngClass]="{
-              'badge bg-warning': leave.status === 'Pending',
+              'badge bg-warning text-dark': leave.status === 'Pending',
               'badge bg-success': leave.status === 'Approved',
               'badge bg-danger': leave.status === 'Rejected'
             }">
-              {{leave.status}}
+              {{ leave.status }}
             </span>
           </td>
 
           <!-- Admin Actions -->
           <td *ngIf="role === 'admin'">
-            <button class="btn btn-success btn-sm me-2" 
-                    (click)="updateStatus(leave.id, 'Approved')">
+
+            <button class="btn btn-success btn-sm me-2"
+                    (click)="updateStatus(leave.id, 'Approved')"
+                    [disabled]="leave.status === 'Approved'">
               Approve
             </button>
 
-            <button class="btn btn-danger btn-sm" 
-                    (click)="updateStatus(leave.id, 'Rejected')">
+            <button class="btn btn-danger btn-sm"
+                    (click)="updateStatus(leave.id, 'Rejected')"
+                    [disabled]="leave.status === 'Rejected'">
               Reject
             </button>
+
           </td>
 
         </tr>
       </tbody>
     </table>
+
   </div>
 
 </div>
 
-<!-- Modal -->
-<div class="modal fade" id="leaveModal">
+<!-- ================= MODAL ================= -->
+<div class="modal fade" id="leaveModal" tabindex="-1">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
 
+      <!-- Header -->
       <div class="modal-header">
-        <h5>Apply Leave</h5>
+        <h5 class="modal-title">Apply Leave</h5>
         <button class="btn-close" data-bs-dismiss="modal"></button>
       </div>
 
+      <!-- Body -->
       <div class="modal-body">
 
-        <input [(ngModel)]="leave.employeeId" class="form-control mb-3" placeholder="Employee ID">
+        <!-- Employee Dropdown -->
+        <label class="form-label">Employee</label>
+        <select [(ngModel)]="leave.employeeId"
+                class="form-control mb-3">
+          <option value="">Select Employee</option>
 
-        <label>From Date</label>
-        <input type="date" [(ngModel)]="leave.fromDate" class="form-control mb-3">
+          <option *ngFor="let emp of employees" [value]="emp.id">
+            {{ emp.name }} (ID: {{ emp.id }})
+          </option>
+        </select>
 
-        <label>To Date</label>
-        <input type="date" [(ngModel)]="leave.toDate" class="form-control mb-3">
+        <!-- From Date -->
+        <label class="form-label">From Date</label>
+        <input type="date"
+               [(ngModel)]="leave.fromDate"
+               class="form-control mb-3">
+
+        <!-- To Date -->
+        <label class="form-label">To Date</label>
+        <input type="date"
+               [(ngModel)]="leave.toDate"
+               class="form-control mb-3">
 
       </div>
 
+      <!-- Footer -->
       <div class="modal-footer">
-        <button class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-        <button class="btn btn-primary" (click)="apply()">Submit</button>
+        <button class="btn btn-secondary" data-bs-dismiss="modal">
+          Cancel
+        </button>
+
+        <button class="btn btn-primary" (click)="apply()">
+          Submit
+        </button>
       </div>
 
     </div>

@@ -17,4 +17,8 @@ export class AttendanceService {
   getAttendance(empId: number) {
     return this.http.get(`${API}/${empId}`);
   }
+
+  getTodayAttendance() {
+  return this.http.get(`${API}/today`);
+}
 }
