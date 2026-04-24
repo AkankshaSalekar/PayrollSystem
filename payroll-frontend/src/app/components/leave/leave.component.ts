@@ -11,16 +11,14 @@ declare var bootstrap: any;
 })
 export class LeaveComponent implements OnInit, AfterViewInit {
 
-  // ================= DATA =================
   leaveList: any[] = [];
   employees: any[] = [];
 
   modal: any;
 
-  // role (for demo)
-  role: string = 'admin';   // change to 'employee' if needed
+  
+  role: string = 'admin';  
 
-  // form model
   leave: any = {
     employeeId: '',
     fromDate: '',
@@ -32,7 +30,6 @@ export class LeaveComponent implements OnInit, AfterViewInit {
     private employeeService: EmployeeService
   ) {}
 
-  // ================= INIT =================
   ngOnInit(): void {
     this.loadLeaves();
     this.loadEmployees();
@@ -43,12 +40,11 @@ export class LeaveComponent implements OnInit, AfterViewInit {
     this.modal = new bootstrap.Modal(modalElement);
   }
 
-  // ================= LOAD DATA =================
 
   loadLeaves(): void {
     this.leaveService.getAllLeaves().subscribe({
       next: (res: any) => {
-        this.leaveList = res.data;   // ✅ correct response handling
+        this.leaveList = res.data;  
       },
       error: (err) => {
         console.error(err);
@@ -69,7 +65,6 @@ export class LeaveComponent implements OnInit, AfterViewInit {
     });
   }
 
-  // ================= MODAL =================
 
   openModal(): void {
     this.leave = {
@@ -81,7 +76,6 @@ export class LeaveComponent implements OnInit, AfterViewInit {
     this.modal.show();
   }
 
-  // ================= APPLY LEAVE =================
 
   apply(): void {
     if (!this.leave.employeeId || !this.leave.fromDate || !this.leave.toDate) {
@@ -102,7 +96,7 @@ export class LeaveComponent implements OnInit, AfterViewInit {
     });
   }
 
-  // ================= UPDATE STATUS =================
+
 
   updateStatus(id: number, status: string): void {
     this.leaveService.updateLeave(id, status).subscribe({
@@ -117,7 +111,6 @@ export class LeaveComponent implements OnInit, AfterViewInit {
     });
   }
 
-  // ================= HELPER =================
 
   getEmployeeName(id: number): string {
     const emp = this.employees.find(e => e.id === id);

@@ -34,14 +34,13 @@ export class EmployeeComponent implements AfterViewInit {
     this.modal = new bootstrap.Modal(modalElement);
   }
 
-  // ================= LOAD =================
+
 load() {
   this.service.getAll().subscribe((res: any) => {
-    this.employees = res.data;   // ✅ IMPORTANT FIX
+    this.employees = res.data; 
   });
 }
 
-  // ================= OPEN MODAL =================
   openModal() {
     this.isEdit = false;
 
@@ -56,14 +55,14 @@ load() {
     this.modal.show();
   }
 
-  // ================= EDIT =================
+
   edit(emp: any) {
     this.isEdit = true;
     this.employee = { ...emp };
     this.modal.show();
   }
 
-  // ================= SAVE =================
+
 save() {
   if (!this.employee.name || !this.employee.role || !this.employee.salaryType) {
     alert("All fields are required");
@@ -72,14 +71,14 @@ save() {
 
   if (this.isEdit) {
     this.service.update(this.employee.id, this.employee).subscribe((res: any) => {
-      alert(res.message);   // ✅ show backend message
+      alert(res.message);  
       this.load();
       this.modal.hide();
       this.reset();
     });
   } else {
     this.service.create(this.employee).subscribe((res: any) => {
-      alert(res.message);   // ✅ show success message
+      alert(res.message);   
       this.load();
       this.modal.hide();
       this.reset();
@@ -87,17 +86,15 @@ save() {
   }
 }
 
-  // ================= DELETE =================
 delete(id: number) {
   if (confirm('Are you sure you want to delete?')) {
     this.service.delete(id).subscribe((res: any) => {
-      alert(res.message);   // ✅ show message
+      alert(res.message);   
       this.load();
     });
   }
 }
 
-  // ================= VIEW =================
   view(emp: any) {
     alert(`
 Name: ${emp.name}
@@ -107,7 +104,7 @@ Amount: ₹${emp.salaryAmount}
     `);
   }
 
-  // ================= RESET =================
+
   reset() {
     this.employee = {
       id: null,

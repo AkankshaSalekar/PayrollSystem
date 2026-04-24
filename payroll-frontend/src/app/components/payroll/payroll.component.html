@@ -1,11 +1,10 @@
 <div class="container-fluid">
 
-  <!-- HEADER -->
+
   <div class="d-flex justify-content-between align-items-center mb-3">
     <h4>Payroll</h4>
   </div>
 
-  <!-- SEARCH -->
   <div class="card p-3 mb-3">
 
     <div class="row">
@@ -29,7 +28,6 @@
     </div>
   </div>
 
-  <!-- RESULT -->
   <div *ngIf="payroll" class="card p-3 mb-3">
 
     <div class="row text-center">
@@ -53,7 +51,6 @@
 
   </div>
 
-  <!-- HISTORY -->
   <div *ngIf="payrollHistory.length > 0" class="card p-3">
 
     <h5>Payroll History</h5>

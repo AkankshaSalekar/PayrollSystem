@@ -1,6 +1,6 @@
 <div class="container-fluid">
 
-  <!-- HEADER -->
+ 
   <div class="d-flex justify-content-between align-items-center mb-3">
     <h4>Attendance</h4>
     <button class="btn btn-primary" (click)="openModal()">+ Mark Attendance</button>
@@ -9,7 +9,6 @@
   Show Today
 </button>
 
-  <!-- SEARCH -->
   <div class="card p-3 mb-3">
     <div class="row">
       <div class="col-md-4">
@@ -21,7 +20,6 @@
     </div>
   </div>
 
-  <!-- TODAY ATTENDANCE -->
  <div class="card p-3 mb-3" *ngIf="showToday && todayList && todayList.length > 0">
     <h5>Today's Attendance</h5>
 
@@ -47,7 +45,7 @@
     </table>
   </div>
 
-  <!-- SEARCH RESULT -->
+
 <div class="card p-3" *ngIf="showSearch && attendanceList && attendanceList.length > 0">
     <h5>Search Result</h5>
 
@@ -79,7 +77,6 @@
 
 </div>
 
-<!-- MODAL -->
 <div class="modal fade" id="attendanceModal">
   <div class="modal-dialog">
     <div class="modal-content">

@@ -22,15 +22,13 @@ export class PayrollComponent implements OnInit {
   ngOnInit(): void {
     this.loadEmployees();
   }
-
-  // ================= LOAD EMPLOYEES =================
+  
   loadEmployees() {
     this.empService.getAll().subscribe((res: any) => {
       this.employees = res.data;
     });
   }
 
-  // ================= GET PAYROLL =================
   getPayroll() {
     if (!this.employeeId) {
       alert('Select Employee');
@@ -40,7 +38,7 @@ export class PayrollComponent implements OnInit {
     this.service.getPayroll(this.employeeId).subscribe({
       next: (res: any) => {
 
-        this.payroll = res.data;   // ✅ FIX
+        this.payroll = res.data;
 
         this.payrollHistory.push({
           employeeId: this.employeeId,
@@ -55,7 +53,6 @@ export class PayrollComponent implements OnInit {
     });
   }
 
-  // ================= HELPER =================
   getEmployeeName(id: number): string {
     const emp = this.employees.find(e => e.id === id);
     return emp ? emp.name : 'Unknown';

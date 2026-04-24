@@ -1,15 +1,13 @@
 <div class="layout">
 
-  <!-- Sidebar -->
   <div class="sidebar" [class.collapsed]="isCollapsed">
 
-    <!-- Logo -->
+ 
     <div class="logo">
       <span *ngIf="!isCollapsed">Payroll</span>
       <span *ngIf="isCollapsed">P</span>
     </div>
 
-    <!-- Menu -->
     <ul class="menu">
       <li routerLink="/employees" routerLinkActive="active">
         <i class="bi bi-people"></i>
@@ -34,16 +32,13 @@
 
   </div>
 
-  <!-- Main Section -->
   <div class="main">
 
-    <!-- Navbar -->
     <div class="navbar">
       <button class="toggle-btn" (click)="toggleSidebar()">☰</button>
       <h5>Payroll & Attendances Management</h5>
     </div>
 
-    <!-- Page Content -->
     <div class="content">
       <router-outlet></router-outlet>
     </div>

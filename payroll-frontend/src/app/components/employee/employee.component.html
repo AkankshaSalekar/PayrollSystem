@@ -1,6 +1,6 @@
 <div class="container-fluid">
 
-  <!-- Header -->
+
   <div class="header">
     <h4>Employees</h4>
   <button class="btn btn-primary" (click)="openModal()">
@@ -8,7 +8,6 @@
 </button>
   </div>
 
-  <!-- Table -->
   <div class="table-card">
     <table class="table">
       <thead>
@@ -28,7 +27,7 @@
           <td>{{ emp.salaryType }}</td>
           <td>₹{{ emp.salaryAmount }}</td>
 
-          <!-- 3 Dot Menu -->
+  
           <td class="text-center">
             <div class="dropdown">
               <button class="action-btn" data-bs-toggle="dropdown">
@@ -64,7 +63,6 @@
 
 </div>
 
-<!-- Modal -->
 <div class="modal fade" id="employeeModal" tabindex="-1">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
