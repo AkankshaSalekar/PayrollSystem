@@ -6,5 +6,5 @@ class Attendance(Base):
 
     id = Column(Integer, primary_key=True)
     employeeId = Column(Integer)
-    date = Column(String)
-    status = Column(String)
+    date = Column(String(20))     
+    status = Column(String(20))     
