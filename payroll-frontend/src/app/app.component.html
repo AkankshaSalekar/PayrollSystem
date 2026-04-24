@@ -1,30 +1,31 @@
 <div class="layout">
 
-  <div class="sidebar" [class.collapsed]="isCollapsed">
+  <div class="sidebar"
+       [class.collapsed]="isCollapsed"
+       [class.mobile-open]="isMobileOpen">
 
- 
     <div class="logo">
       <span *ngIf="!isCollapsed">Payroll</span>
       <span *ngIf="isCollapsed">P</span>
     </div>
 
     <ul class="menu">
-      <li routerLink="/employees" routerLinkActive="active">
+      <li routerLink="/employees" routerLinkActive="active" (click)="closeMobile()">
         <i class="bi bi-people"></i>
         <span *ngIf="!isCollapsed">Employees</span>
       </li>
 
-      <li routerLink="/attendance" routerLinkActive="active">
+      <li routerLink="/attendance" routerLinkActive="active" (click)="closeMobile()">
         <i class="bi bi-calendar-check"></i>
         <span *ngIf="!isCollapsed">Attendance</span>
       </li>
 
-      <li routerLink="/leave" routerLinkActive="active">
+      <li routerLink="/leave" routerLinkActive="active" (click)="closeMobile()">
         <i class="bi bi-file-earmark-text"></i>
         <span *ngIf="!isCollapsed">Leave</span>
       </li>
 
-      <li routerLink="/payroll" routerLinkActive="active">
+      <li routerLink="/payroll" routerLinkActive="active" (click)="closeMobile()">
         <i class="bi bi-cash-stack"></i>
         <span *ngIf="!isCollapsed">Payroll</span>
       </li>
@@ -32,11 +33,13 @@
 
   </div>
 
+  <div class="overlay" *ngIf="isMobileOpen" (click)="closeMobile()"></div>
+
   <div class="main">
 
     <div class="navbar">
       <button class="toggle-btn" (click)="toggleSidebar()">☰</button>
-      <h5>Payroll & Attendances Management</h5>
+      <h5>Payroll & Attendance Management</h5>
     </div>
 
     <div class="content">

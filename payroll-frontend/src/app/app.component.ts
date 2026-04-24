@@ -8,10 +8,18 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
 
-  isCollapsed = false;
-  title = 'payroll-frontend';
+isCollapsed = false;
+isMobileOpen = false;
 
-  toggleSidebar() {
-  this.isCollapsed = !this.isCollapsed;
+toggleSidebar() {
+  if (window.innerWidth <= 768) {
+    this.isMobileOpen = !this.isMobileOpen;
+  } else {
+    this.isCollapsed = !this.isCollapsed;
+  }
+}
+
+closeMobile() {
+  this.isMobileOpen = false;
 }
 }
