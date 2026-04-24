@@ -1,8 +1,8 @@
+import os
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, declarative_base
 
-# ✅ Railway MySQL URL (IMPORTANT CHANGE)
-DATABASE_URL = "mysql+pymysql://root:XmOemfvCkVInVbXZcVejbRnThoWLgigR@shortline.proxy.rlwy.net:41725/railway"
+DATABASE_URL = os.getenv("DATABASE_URL")
 
 engine = create_engine(DATABASE_URL)
 
