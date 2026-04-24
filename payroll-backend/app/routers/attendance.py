@@ -29,7 +29,7 @@ def mark(data: AttendanceCreate, db: Session = Depends(get_db)):
     }
 
 # ================= TODAY ATTENDANCE =================
-@router.get("/today")   # ✅ MUST COME FIRST
+@router.get("/today")  
 def get_today_attendance(db: Session = Depends(get_db)):
     today = str(date.today())
 
@@ -44,7 +44,7 @@ def get_today_attendance(db: Session = Depends(get_db)):
     }
 
 # ================= GET BY EMPLOYEE =================
-@router.get("/{empId}")   # ✅ MUST COME AFTER
+@router.get("/{empId}")   
 def get(empId: int, db: Session = Depends(get_db)):
     records = db.query(Attendance)\
         .filter(Attendance.employeeId == empId)\

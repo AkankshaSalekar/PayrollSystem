@@ -13,7 +13,7 @@ def get_db():
         yield db
     finally:
         db.close()
-
+# ================= GET ID =================
 @router.get("/{empId}")
 def get_payroll(empId: int, db: Session = Depends(get_db)):
 
